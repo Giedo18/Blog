@@ -269,8 +269,6 @@ def grafieken():
                             ['1) uitstekende gezondheid', '2) goede gezondheid', '3) redelijke gezondheid',
                              '4) matige gezondheid', '5) slechte gezondheid'], inplace=True)
     
-    st.write("Hoeveelheid alcoholgebruik doordeweeks")
-    
     genre = st.radio(
     "Hoeveelheidalcoholgebruik doordeweeks", ("1) erg laag","2) laag","3) gemiddeld","4) hoog","5) erg hoog"))
     
@@ -316,7 +314,7 @@ def grafieken():
                                 legend_title = 'Gezondheidsstatus van de studenten')
         st.plotly_chart(fig_dalc4)
     
-    if check_dalc5:
+    else:
         piedf = piedf[piedf['Dalc'] == '5) erg hoog']
         fig_dalc5 = px.pie(data_frame = piedf,
                            values = "aantal",
