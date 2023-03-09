@@ -424,12 +424,18 @@ def grafieken():
     # Plot age en G3 met dropdown!
     st.write("""
     ## Invloed van de leeftijd van een student op het behaalde resultaat
-    In de onderstaande grafiek wordt de relatiehttp://localhost:8889/notebooks/OneDrive/Data%20Science%20minor/Case%20opdrachten/Case/versie2.ipynb# weergegeven tussen de leeftijd van een student en het resultaat dat de
+    In de onderstaande grafiek wordt de relatie weergegeven tussen de leeftijd van een student en het resultaat dat de
     student had behaald voor het vak.""")
     
     
-    InvoerSchool = st.selectbox("Selecteer een school,", ("GP", "MS"))
-    df_school = df[df["school"] == InvoerSchool]
+    InvoerSchool = st.selectbox("Selecteer een school,", ("Gabriel Pereira", "Mousinho da Silveira"))
+    
+    df_tijdelijk= df
+    df_tijdelijk["school"].replace(["GP","MS"],
+                     ["Gabriel Pereira", "Mousinho da Silveira"],
+                    inplace = True)
+    
+    df_school = df_tijdelijk[df_tijdelijk["school"] == InvoerSchool]
     
     fig_school = px.box(data_frame=df_school,
           x = "age",
