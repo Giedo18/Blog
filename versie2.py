@@ -429,7 +429,7 @@ def grafieken():
     
     
     InvoerSchool = st.selectbox("Selecteer een school,", ("GP", "MS"))
-    df_school = df_sameng[df_sameng["school"] == InvoerSchool]
+    df_school = df[df["school"] == InvoerSchool]
     
     fig_school = px.box(data_frame=df_school,
           x = "age",
@@ -441,15 +441,8 @@ def grafieken():
         Uit deze grafiek blijkt dus ...................
         """)
     
-#     piedf = piedf[piedf['school'] == 'GP']
-#     fig1 = px.box(data_frame=df,
-#               x = "age",
-#               y = "G3")
-
-    #fig1.update_layout(title = 'Relatie tussen aantal absenties en het uitgaansgedrag van de studenten',
-                          #xaxis_title = 'Absenties',
-                          #yaxis_title = 'Aantal keer uitgaan per week',
-                          #legend_title = 'Cijfers')
+    ######################################################################################################################
+    #Plot 
 
 
 page_names_to_funcs = {
