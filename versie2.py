@@ -417,7 +417,7 @@ def grafieken():
 
     fig = px.box(df,
                  x = "Dalc",
-                 y = "G3"
+                 y = "G3",
                  color = "G3",
                  color_discrete_map = kleuren_alcoholgebruik)
 
