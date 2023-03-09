@@ -162,6 +162,7 @@ def grafieken():
     import streamlit as st
     import pandas as pd
     import plotly.express as px
+    import numpy as np
     #from IPython import get_ipython
     
     st.markdown(f"# {list(page_names_to_funcs.keys())[2]}")
@@ -270,13 +271,16 @@ def grafieken():
     
     st.write("Hoeveelheid alcoholgebruik doordeweeks")
     
-    check_dalc1 = st.checkbox('1) erg laag')
-    check_dalc2 = st.checkbox('2) laag')
-    check_dalc3 = st.checkbox('3) gemiddeld')
-    check_dalc4 = st.checkbox('4) hoog')
-    check_dalc5 = st.checkbox('5) erg hoog')
+    genre = st.radio(
+    "Hoeveelheidalcoholgebruik doordeweeks", ("1) erg laag","2) laag","3) gemiddeld","4) hoog","5) erg hoog"))
     
-    if check_dalc1:
+    #check_dalc1 = st.checkbox("1) erg laag")
+    #check_dalc2 = st.checkbox("2) laag")
+    #check_dalc3 = st.checkbox("3) gemiddeld")
+    #check_dalc4 = st.checkbox("4) hoog")
+    #check_dalc5 = st.checkbox("5) erg hoog")
+    
+    if genre == "1) erg laag":
         piedf = piedf[piedf['Dalc'] == '1) erg laag']
         fig_dalc1 = px.pie(data_frame = piedf,
                            values = "aantal",
@@ -285,7 +289,7 @@ def grafieken():
                                 legend_title = 'Gezondheidsstatus van de studenten')
         st.plotly_chart(fig_dalc1)
     
-    if check_dalc2:
+    elif genre == "2) laag":
         piedf = piedf[piedf['Dalc'] == '2) laag']
         fig_dalc2 = px.pie(data_frame = piedf,
                            values = "aantal",
@@ -294,7 +298,7 @@ def grafieken():
                                 legend_title = 'Gezondheidsstatus van de studenten')
         st.plotly_chart(fig_dalc2)
     
-    if check_dalc3:
+    elif genre == "3) gemiddeld":
         piedf = piedf[piedf['Dalc'] == '3) gemiddeld']
         fig_dalc3 = px.pie(data_frame = piedf,
                            values = "aantal",
@@ -303,7 +307,7 @@ def grafieken():
                                 legend_title = 'Gezondheidsstatus van de studenten')
         st.plotly_chart(fig_dalc3)
     
-    if check_dalc4:
+    elif genre == "4) hoog":
         piedf = piedf[piedf['Dalc'] == '4) hoog']
         fig_dalc4 = px.pie(data_frame = piedf,
                            values = "aantal",
@@ -441,7 +445,7 @@ def grafieken():
     student had behaald voor het vak.""")
     
     
-    InvoerSchool = st.selectbox("# Selecteer een school:", ("Gabriel Pereira", "Mousinho da Silveira"))
+    InvoerSchool = st.selectbox("## Selecteer een school:", ("Gabriel Pereira", "Mousinho da Silveira"))
     
     df_tijdelijk= df
     df_tijdelijk["school"].replace(["GP","MS"],
@@ -472,10 +476,12 @@ def grafieken():
     
     df["hoogste_opleidingsniveau"] = np.where(df["Medu"] >= df["Fedu"], df["Medu"], df["Fedu"])
     df['behaald'] = df['G3'].apply(lambda x: 'behaald' if x >=10  else 'niet behaald')
-    df['hoogste_opleidingsniveau'].nunique()
+    #df['hoogste_opleidingsniveau'].nunique()
+    
     selectie2 = df[['hoogste_opleidingsniveau','behaald']].groupby(['hoogste_opleidingsniveau','behaald']).value_counts()
     selectie2 = pd.DataFrame(selectie2, columns=['aantal'])
     selectie2 = selectie2.reset_index()
+    
     selectie2['tot_deelname'] = selectie2.groupby('hoogste_opleidingsniveau')['aantal'].transform('sum')
     selectie2['percentage_behaald'] = round(selectie2['aantal']/selectie2['tot_deelname']*100,2)
     selectie2['hoogste_opleidingsniveau'].replace([0,1,2,3,4],['geen opleiding','basis onderwijs',
@@ -492,7 +498,8 @@ def grafieken():
     st.plotly_chart(fig_opleidingouders)
     
     st.write("""
-        Uit deze grafiek blijkt dus ...................
+        Uit deze grafiek blijkt dat er bij de wiskunde studenten een sterk verband is te zien tussen het opleidingsniveau van
+        de ouders 
         """)
 
     
