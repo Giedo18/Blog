@@ -455,11 +455,10 @@ def grafieken():
     In de onderstaande grafiek wordt de relatie weergegeven tussen het opleidingsniveau van de ouders, en of de student
     wel of niet het vak heeft gehaald.""")
     
-    df["hoogste_opleidingsniveau"] = np.where(df["Medu"] >= df["Fedu"], df["Medu"], df["Fedu"])
-    df['behaald'] = df['G3'].apply(lambda x: 'behaald' if x >=10  else 'niet behaald')
-    df.head(10)
-    df['hoogste_opleidingsniveau'].nunique()
-    selectie2 = df[['hoogste_opleidingsniveau','behaald']].groupby(['hoogste_opleidingsniveau','behaald']).value_counts()
+    df10["hoogste_opleidingsniveau"] = np.where(df["Medu"] >= df["Fedu"], df["Medu"], df["Fedu"])
+    df10['behaald'] = df['G3'].apply(lambda x: 'behaald' if x >=10  else 'niet behaald')
+    df10['hoogste_opleidingsniveau'].nunique()
+    selectie2 = df10[['hoogste_opleidingsniveau','behaald']].groupby(['hoogste_opleidingsniveau','behaald']).value_counts()
     selectie2 = pd.DataFrame(selectie2, columns=['aantal'])
     selectie2 = selectie2.reset_index()
     selectie2['tot_deelname'] = selectie2.groupby('hoogste_opleidingsniveau')['aantal'].transform('sum')
