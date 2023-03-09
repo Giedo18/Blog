@@ -253,7 +253,8 @@ def grafieken():
     # Plot health and Dalc
     st.write("""
         ## Invloed van alcoholgebruik op de gezondheid
-        tekst uitleg.....""")
+        Hier kun je het alcoholgebruik doordeweeks selecteren. Er zal dan een pie chart getoond worden waarin de gezondheidstatus 
+        verdeling wordt weergegeven van de studenten met het geselecteerde alcohol gebruik. """)
     
     piedf = df_sameng.value_counts(["Dalc", "health"]).reset_index()
     piedf.rename(columns = {0: "aantal"}, inplace = True)
@@ -416,8 +417,9 @@ def grafieken():
 
     fig = px.box(df,
                  x = "Dalc",
-                 y = "G3",
-                color_discrete_map = kleuren_alcoholgebruik)
+                 y = "G3"
+                 color = "G3",
+                 color_discrete_map = kleuren_alcoholgebruik)
 
     fig.update_layout(title = 'Relatie tussen alcoholgebruik (door de weeks) en de hoogte van de cijfers',
                       xaxis_title = 'Door de weeks alcoholgebruik',
