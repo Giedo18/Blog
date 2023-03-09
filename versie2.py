@@ -321,7 +321,8 @@ def grafieken():
         st.plotly_chart(fig_dalc5)
     
     st.write("""
-        Uit deze grafiek blijkt ...........""")
+        Uit deze grafieken blijkt dat er niet een direct verband is tussen het alcohol gebruik door de weeks en de
+        gezondheidsstatus van de studenten. Dit kan komen doordat ziektes niet gerelateerd zijn het alcoholgebruik """)
     
     
     ###################################################################################################################
@@ -399,7 +400,8 @@ def grafieken():
     st.plotly_chart(fig)
     
     st.write("""
-        Uit deze grafiek blijkt dus ...................
+        Uit deze grafiek is goed te zien dat wanneer er meer tijd in de studie gaat het percentage dat een "E" of een "F" haalt
+        lager wordt
         """)
     
     ###################################################################################################################
@@ -424,7 +426,9 @@ def grafieken():
     st.plotly_chart(fig)
     
     st.write("""
-        Uit deze grafiek blijkt dus ...................
+        Uit deze grafiek blijkt dat het alcohol gebruik niet direct een invloed heeft op het behaalde cijfer. Namelijk als het
+        alcoholgebruik "erg hoog" is, halen deze student doorgaans een hoger cijfer dan de anderen. Wel is goed te zien dat 
+        Mensen die geen of weinig alcohol drinken door de weeks hogere cijfers kunnen halen
         """)
     
     ###################################################################################################################
@@ -451,7 +455,9 @@ def grafieken():
     st.plotly_chart(fig_school)
     
     st.write("""
-        Uit deze grafiek blijkt dus ...................
+        Uit deze grafiek blijkt dat er op Gabriel Pereira oudere studenten zitten. De oudere studenten halen lagere cijfers
+        dan de studenten die tussen 15 en 20 zijn. Verder zijn de cijfers van de studenten in deze leeftijdscategorie aardig 
+        geljk
         """)
     
     ######################################################################################################################
