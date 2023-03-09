@@ -414,11 +414,12 @@ def grafieken():
     df['Dalc'].replace([1,2,3,4,5],
                        ['1) erg laag','2) laag','3) gemiddeld', '4) hoog', '5) erg hoog'],
                        inplace=True)
+
     fig = px.box(df,
                  x = "Dalc",
-                 y = "G3",
+                 y = "G3")
                 # color = "G3",
-                # color_discrete_map = kleuren_alcoholgebruik)
+                # color_discrete_map = kleuren_alcoholgebruik
 
     fig.update_layout(title = 'Relatie tussen alcoholgebruik (door de weeks) en de hoogte van de cijfers',
                       xaxis_title = 'Door de weeks alcoholgebruik',
