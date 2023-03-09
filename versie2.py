@@ -428,7 +428,7 @@ def grafieken():
     student had behaald voor het vak.""")
     
     
-    InvoerSchool = st.selectbox("Selecteer een school,", ("Gabriel Pereira", "Mousinho da Silveira"))
+    InvoerSchool = st.selectbox("# Selecteer een school:", ("Gabriel Pereira", "Mousinho da Silveira"))
     
     df_tijdelijk= df
     df_tijdelijk["school"].replace(["GP","MS"],
@@ -449,8 +449,41 @@ def grafieken():
     
     ######################################################################################################################
     #Plot 
+    
+    st.write("""
+    ## Invloed van het opleidingsniveau van de ouders op het wel of niet halen van het vak
+    In de onderstaande grafiek wordt de relatie weergegeven tussen het opleidingsniveau van de ouders, en of de student
+    wel of niet het vak heeft gehaald.""")
+    
+    df["hoogste_opleidingsniveau"] = np.where(df["Medu"] >= df["Fedu"], df["Medu"], df["Fedu"])
+    df['behaald'] = df['G3'].apply(lambda x: 'behaald' if x >=10  else 'niet behaald')
+    df.head(10)
+    df['hoogste_opleidingsniveau'].nunique()
+    selectie2 = df[['hoogste_opleidingsniveau','behaald']].groupby(['hoogste_opleidingsniveau','behaald']).value_counts()
+    selectie2 = pd.DataFrame(selectie2, columns=['aantal'])
+    selectie2 = selectie2.reset_index()
+    selectie2['tot_deelname'] = selectie2.groupby('hoogste_opleidingsniveau')['aantal'].transform('sum')
+    selectie2['percentage_behaald'] = round(selectie2['aantal']/selectie2['tot_deelname']*100,2)
+    selectie2['hoogste_opleidingsniveau'].replace([0,1,2,3,4],['geen opleiding','basis onderwijs',
+                                                               '3de klas middelbareschool', 'voortgezet onderwijs afgerond', 
+                                                               'hoger onderwijs'],
+                       inplace=True)
 
+    
+    fig_opleidingouders = px.line(selectie2,x='hoogste_opleidingsniveau', y='percentage_behaald',color='behaald')
+    fig_opleidingouders.update_layout(title="verband behaalde examens en opleidingsniveau ouders",
+                 xaxis_title= "opleidingsniveau ouders",
+                 yaxis_title="percentage behaald")
 
+    st.plotly_chart(fig_opleidingouders)
+    
+    st.write("""
+        Uit deze grafiek blijkt dus ...................
+        """)
+
+    
+    
+    ######################################################################################################################
 page_names_to_funcs = {
     "Opdrachtomschrijving": intro,
     "Data analyse": data_analyse,
